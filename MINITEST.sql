@@ -77,10 +77,8 @@ CASE
 	END as status_name
 FROM book;
 
-ALTER TABLE book
-ADD COLUMN number_o_year_publish DATE;
-SELECT title, number_o_year_publish FROM book
-HAVING number_o_year_publish = CURDATE() - publish_date;
+SELECT UPPER(title) AS title_upper, YEAR(CURDATE()) - YEAR(publish_date) AS years_since_publish
+FROM book;
 
 SELECT b.title, b.price, c.category_name FROM book as b
 JOIN category as c
