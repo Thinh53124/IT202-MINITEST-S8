@@ -35,7 +35,7 @@ ALTER TABLE book_order
 MODIFY COLUMN customer_name VARCHAR(200);
 
 ALTER TABLE book_order
-MODIFY COLUMN delivery_date DATE CHECK (delivery_date >= order_date);
+ADD CHECK (delivery_date >= order_date);
 
 INSERT INTO category (category_id, category_name, description)
 VALUES
@@ -56,10 +56,6 @@ VALUES
 (102, 'Tran Bao Ngoc', 3, '2025-02-05', '2025-02-10'),
 (103, 'Le Hoang Yen', 4, '2025-03-12', NULL);
 
-SELECT * FROM category;
-SELECT * FROM book;
-SELECT * FROM book_order;
-
 UPDATE book
 SET price = price + 50000
 WHERE category_id = 1;
@@ -77,12 +73,12 @@ CASE
 	END as status_name
 FROM book;
 
-SELECT UPPER(title) AS title_upper, YEAR(CURDATE()) - YEAR(publish_date) AS years_since_publish
+SELECT UPPER(title) , YEAR(CURDATE()) - YEAR(publish_date) AS years_since_publish
 FROM book;
 
 SELECT b.title, b.price, c.category_name FROM book as b
 JOIN category as c
- ON c.category_id = b.category_id;
+	ON c.category_id = b.category_id;
  
 SELECT * FROM book
 ORDER BY price DESC 
